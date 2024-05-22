@@ -1,0 +1,18 @@
+(defun c:CLT (/ pnt txt ent)
+  (while (setq pnt (getpoint "\nSpecify center point for circle <exit>: "))
+    (command-s "_.CIRCLE" "_none" pnt)
+    (if (/= "" (setq txt (getstring "\nSpecify Text...")))
+    (progn
+      (entmakex
+    (list '(0 . "TEXT")
+          (cons 10 '(0 0 0))
+          (cons 40 1)
+          (cons 7 (getvar "TEXTSTYLE"))
+          (cons 1 txt)))
+      (command "_move" (entlast) "" '(0 0 0) pause))
+    (princ "\n<!> No Text Specified <!>"))
+  (princ)
+    (if (setq pnt (getpoint "\nSpecify first point for line <no line>: "))
+      (command "_.LINE" "_none" pnt PAUSE "")))
+  (princ)
+)

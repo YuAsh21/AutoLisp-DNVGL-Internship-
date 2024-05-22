@@ -1,0 +1,7 @@
+(defun c:CircleLine (/ pnt)
+  (while (setq pnt (getpoint "\nSpecify center point for circle <exit>: "))
+    (command-s "_.CIRCLE" "_none" pnt)
+    (if (setq pnt (getpoint "\nSpecify first point for line <no line>: "))
+      (command "_.LINE" "_none" pnt PAUSE "")))
+  (princ)
+)
